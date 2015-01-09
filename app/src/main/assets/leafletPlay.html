@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leaflet Quick Start Guide Example</title>
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+
+    <style>
+        body {
+        padding: 0;
+        margin: 0;
+        }
+        html, body, #map {
+        height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+<script type="text/javascript">
+var MyMarker = L.Marker.extend({
+  options: {
+    id: 0
+  },
+
+    initialize: function (options) {
+        L.Util.setOptions(this, options);
+
+    }
+});
+var greenIcon = L.icon({
+    iconUrl: 'file:///android_asset/marker_green.png',
+    iconSize: [32, 46],
+    iconAnchor:   [16, 46]
+});
+        var markers = [];
+  		var map = L.map('map').setView([51.505, 4.09], 5);
+
+        L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.png', {
+            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+            subdomains: 'abcd',
+            minZoom: 1,
+            maxZoom: 16
+        }).addTo(map);
+        var Stamen_TonerLines = L.tileLayer('http://{s}.tile.stamen.com/toner-lines/{z}/{x}/{y}.png', {
+            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+            subdomains: 'abcd',
+            minZoom: 0,
+            maxZoom: 20
+        }).addTo(map);
+
+
+
+        function showName(e)
+        {
+            if(isAndroidAnswerCorrect(this.options.id))
+            {
+
+                this.setIcon(greenIcon);
+            }
+            Android.showName(this.options.id);
+        }
+
+		//map.on('click', showName);
+
+
+  function showAndroidToast(toast) {
+        Android.showToast(toast);
+    }
+    function isAndroidAnswerCorrect(index){
+        return parseInt(Android.isAnswerCorrect(index));
+    }
+    function showAndroidMark(){
+
+        var mark = String(Android.getMark());
+        var arrayString = mark.split("|");
+        var array = [];
+        for(i=0;i<arrayString.length;i++)
+        {
+            subarray = [];
+            temp = arrayString[i].split(",");
+            subarray[0] = parseFloat(temp[0]);
+            subarray[1] = parseFloat(temp[1]);
+
+            array[i] = subarray;
+        }
+        var latlngs = [];
+        for(ii=0;ii<array.length;ii++)
+        {
+            var latlng = L.latLng(array[ii]);
+            latlngs.push(latlng);
+
+          m = new MyMarker({id: ii});
+
+          m.setLatLng(array[ii])
+          .on('click', showName)
+          .addTo(map);
+
+          markers.push(m);
+        }
+        var bounds = L.latLngBounds(latlngs);
+        map.fitBounds(bounds);
+        map.setView(bounds.getCenter());
+    }
+
+    showAndroidMark();
+	</script>
+
+<input type="button" value="Say hello" onClick="showAndroidToast('mmm')" />
+<input type="button" value="test" onClick="showAndroidMark()" />
+
+<script type="text/javascript">
+
+
+</script>
+</body>
+</html>

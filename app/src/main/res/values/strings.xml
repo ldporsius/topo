@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Topo</string>
+    <string name="title_activity_maps">Bewerk kaart</string>
+    <string name="title_activity_list_maps">Kaarten</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Instellingen</string>
+    <string name="title_activity_create_map">Maak een kaart</string>
+    <string name="title_activity_choose_map">Kies een toets</string>
+    <string name="title_activity_play">Toets</string>
+    <string name="title_activity_start">Topo</string>
+    <string name="title_activity_downloads">DownloadsActivity</string>
+    <string name="title_activity_leaflet">LeafletActivity</string>
+
+</resources>

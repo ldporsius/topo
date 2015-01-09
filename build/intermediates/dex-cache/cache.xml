@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="/home/linda/AndroidStudio/Topo/app/build/intermediates/pre-dexed/debug/support-annotations-20.0.0-508aeae4fcb78d81ee7a095eab7bc75fa50cbc9a.jar"
+        jar="/opt/android-sdk-linux/extras/android/m2repository/com/android/support/support-annotations/20.0.0/support-annotations-20.0.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="9d9013e9ff35fc3756411e62873c363c70c638fa"/>
+    <item
+        dex="/home/linda/AndroidStudio/Topo/app/build/intermediates/pre-dexed/debug/internal_impl-20.0.0-35cd5e82e5901ccfe4b681b6379224004f793b6c.jar"
+        jar="/home/linda/AndroidStudio/Topo/app/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/libs/internal_impl-20.0.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d"/>
+    <item
+        dex="/home/linda/AndroidStudio/Topo/app/build/intermediates/pre-dexed/debug/classes-82733d32377b634810af7006856c2dd29e53be63.jar"
+        jar="/home/linda/AndroidStudio/Topo/app/build/intermediates/exploded-aar/com.android.support/support-v4/20.0.0/classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="8694693636ab36910c8100ce527c258ff3ebece0"/>
+    <item
+        dex="/home/linda/AndroidStudio/Topo/app/build/intermediates/pre-dexed/debug/classes-0c1fdec317ddbc7f71f9674e9e50ee192934bf71.jar"
+        jar="/home/linda/AndroidStudio/Topo/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/20.0.0/classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="f21927d22fe31889ecce94dd697a2e75b137e0ef"/>
+    <item
+        dex="/home/linda/AndroidStudio/Topo/app/build/intermediates/pre-dexed/debug/classes-3446b4bdacf6a51147dc9b5162938d67093f96d1.jar"
+        jar="/home/linda/AndroidStudio/Topo/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.1.11/classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="0f700f6802ba1a1f1fa7ac26d5db0666a89d75a6"/>
+
+</pre-dex-items>

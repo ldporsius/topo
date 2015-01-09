@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leaflet Quick Start Guide Example</title>
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+
+    <style>
+        body {
+        padding: 0;
+        margin: 0;
+        }
+        html, body, #map {
+        height: 100%;
+        }
+        input {
+        font-size:x-large;
+        }
+    </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+<script type="text/javascript">
+
+var MyMarker = L.Marker.extend({
+  options: {
+    id: 0
+
+  },
+
+    initialize: function (options) {
+        L.Util.setOptions(this, options);
+
+    }
+});
+var greenIcon = L.icon({
+    iconUrl: 'file:///android_asset/marker_green.png',
+    iconAnchor:   [19, 46],
+    iconSize: [38, 46],
+    popupAnchor: [0, -41]
+
+});
+var blueIcon = L.icon({
+    iconUrl: 'file:///android_asset/marker_blue.png',
+    iconAnchor:   [19, 46],
+    iconSize: [38, 46],
+    popupAnchor: [0, -41]
+
+});
+	var map = L.map('map');
+
+       L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+			maxZoom: 18,
+			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+				'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+				'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+			id: 'examples.map-i875mjb7'
+		}).addTo(map);
+
+function onPopupOpen(e) {
+    map.off('click', onMapClick);
+    var tempMarker = this;
+
+   Android.setLocSelected(tempMarker.options.id);
+   Android.showName(tempMarker.options.id);
+
+    document.getElementById('deleteButton').onclick = function(){
+        Android.delete(tempMarker.options.id);
+        map.removeLayer(tempMarker);
+
+    }
+    document.getElementById('editButton').onclick = function(){
+        Android.showName(tempMarker.options.id);
+        tempMarker.closePopup();
+    }
+
+}
+function onPopupClose()
+{
+    map.on('click', onMapClick);
+}
+
+function onMarkerDrag(e){
+    var marker = e.target;
+
+    Android.changeLoc(marker.options.id, marker.getLatLng().toString());
+}
+function onMapClick(e) {
+   var clickable = parseInt(Android.getClickable());
+   if(clickable === 1)
+   {
+    var listId = parseInt(Android.getListSize());
+
+    var m = new MyMarker({id: listId, draggable:true});
+        m.setLatLng(e.latlng)
+        .bindPopup("<input type='button' value='Delete' id='deleteButton' class='marker-delete-button' />  <input type='button' value='Edit' id='editButton' />")
+        .on("popupopen", onPopupOpen)
+        .on("popupclose", onPopupClose)
+        .on('dragend', onMarkerDrag)
+        .addTo(map);
+
+        Android.addToList(e.latlng.toString());
+        Android.setLocSelected(listId);
+        Android.showName(listId);
+
+        Android.setClickable(0);
+        Android.setNewButtonGray();
+   }
+}
+
+    map.on('click', onMapClick);
+
+     function showAndroidMark(){
+
+        var mark = String(Android.getMark());
+
+        if(mark.length === 0)
+        {
+            map.setView([0,0], 1);
+            return;
+        }
+        var arrayString = mark.split("|");
+        var array = [];
+
+        for(i=0;i<arrayString.length;i++)
+        {
+            subarray = [];
+            temp = arrayString[i].split(",");
+            subarray[0] = parseFloat(temp[0]);
+            subarray[1] = parseFloat(temp[1]);
+
+            array[i] = subarray;
+        }
+
+
+        var popup = "<input type='button' value='Delete' id='deleteButton' />  <input type='button' value='Edit' id='editButton' />";
+
+        var latlngs = [];
+        for(ii=0;ii<array.length;ii++)
+        {
+            var latlng = L.latLng(array[ii]);
+            latlngs.push(latlng);
+
+          m = new MyMarker({id: ii, icon: greenIcon, draggable:true});
+          m.bindPopup(popup);
+          m.setLatLng(array[ii])
+          .on("popupopen", onPopupOpen)
+          .on("popupclose", onPopupClose)
+          .on('dragend', onMarkerDrag)
+          .addTo(map);
+
+        }
+        if(latlngs.length > 1)
+        {
+            var bounds = L.latLngBounds( latlngs );
+
+            map.fitBounds(bounds);
+            map.setView(bounds.getCenter());
+        }
+        else
+        {
+            map.setView([0.0,0.0], 1);
+        }
+    }
+
+    showAndroidMark();
+
+</script>
+
+</body>
+</html>
