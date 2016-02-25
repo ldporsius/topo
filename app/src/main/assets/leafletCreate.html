@@ -55,13 +55,25 @@ var blueIcon = L.icon({
 });
 	var map = L.map('map');
 
-       L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
-			maxZoom: 18,
-			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-				'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-				'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-			id: 'examples.map-i875mjb7'
-		}).addTo(map);
+       <!--L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {-->
+			<!--maxZoom: 18,-->
+			<!--attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +-->
+				<!--'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +-->
+				<!--'Imagery © <a href="http://mapbox.com">Mapbox</a>',-->
+			<!--id: 'examples.map-i875mjb7'-->
+		<!--}).addTo(map);-->
+ L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.png', {
+            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+            subdomains: 'abcd',
+            minZoom: 1,
+            maxZoom: 16
+        }).addTo(map);
+        var Stamen_TonerLines = L.tileLayer('http://{s}.tile.stamen.com/toner-lines/{z}/{x}/{y}.png', {
+            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+            subdomains: 'abcd',
+            minZoom: 0,
+            maxZoom: 20
+        }).addTo(map);
 
 function onPopupOpen(e) {
     map.off('click', onMapClick);
@@ -81,6 +93,7 @@ function onPopupOpen(e) {
     }
 
 }
+
 function onPopupClose()
 {
     map.on('click', onMapClick);

@@ -36,7 +36,8 @@ public class CreateMapActivity extends ActionBarActivity {
                 if(editName.getText().toString().equalsIgnoreCase(""))
                     Toast.makeText(CreateMapActivity.this, "Typ een naam", Toast.LENGTH_SHORT).show();
                 else {
-                    mapDatasource.createMap(editName.getText().toString(), FileUtil.readFile("topo_user.txt"));
+                    String user = FileUtil.readFile("topo_user.txt") == null? "noone" :FileUtil.readFile("topo_user.txt") ;
+                    mapDatasource.createMap(editName.getText().toString(), user);
                     Toast.makeText(CreateMapActivity.this, "Kaart opgeslagen", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(CreateMapActivity.this, EditMapActivity.class);
                     intent.putExtra("MAP", mapDatasource.getLastMap());
